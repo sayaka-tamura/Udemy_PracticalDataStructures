@@ -13,6 +13,6 @@ public class App {
 		myList.insertFirst(50);
 		myList.insertFirst(100);
 
-		myList.displayList();
+		myList.displayBackward();
 	}
 }
