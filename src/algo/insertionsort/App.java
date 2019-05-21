@@ -3,7 +3,7 @@
  * May 19, 2019
  * Udemy - Practical Data Structures & Algorithms in Java + HW Course
  */
-package algo.insertinsort;
+package algo.insertionsort;
 
 public class App {
 	public static void main(String[] args) {
