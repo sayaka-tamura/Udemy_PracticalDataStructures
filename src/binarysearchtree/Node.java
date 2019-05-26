@@ -8,7 +8,7 @@ package binarysearchtree;
 public class Node {
 	int key;
 	String value;
-	Node leftchild, rightchild;
+	Node leftChild, rightChild;
 
 	public Node(int key, String value) {
 		super();

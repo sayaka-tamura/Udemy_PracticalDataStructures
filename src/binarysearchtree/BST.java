@@ -21,15 +21,15 @@ public class BST {
 			while (true) {
 				parent = current;
 				if (key < current.key) {
-					current = current.leftchild;
+					current = current.leftChild;
 					if (current == null) { // It's parent is the leaf node
-						parent.leftchild = newNode;
+						parent.leftChild = newNode;
 						return;
 					}
 				} else if (key > current.key) {
-					current = current.rightchild;
+					current = current.rightChild;
 					if (current == null) { // It's parent is the leaf node
-						parent.rightchild = newNode;
+						parent.rightChild = newNode;
 						return;
 					}
 				}
@@ -43,7 +43,7 @@ public class BST {
 
 		while (current != null) {
 			last = current;
-			current = current.leftchild;
+			current = current.leftChild;
 		}
 		return last;
 	}
@@ -54,7 +54,7 @@ public class BST {
 
 		while (current != null) {
 			last = current;
-			current = current.rightchild;
+			current = current.rightChild;
 		}
 		return last;
 	}
@@ -71,9 +71,9 @@ public class BST {
 			parentNode = currentNode;
 			if (key < currentNode.key) {
 				isLeftChild = true;
-				currentNode = currentNode.leftchild;
+				currentNode = currentNode.leftChild;
 			} else {
-				currentNode = currentNode.rightchild;
+				currentNode = currentNode.rightChild;
 				isLeftChild = false;
 			}
 			if (currentNode == null)
@@ -84,32 +84,32 @@ public class BST {
 		Node nodeToDelete = currentNode;
 
 		// Case 1: if node is a leaf
-		if (nodeToDelete.leftchild == null && nodeToDelete.rightchild == null) {
+		if (nodeToDelete.leftChild == null && nodeToDelete.rightChild == null) {
 			if (nodeToDelete == root)
 				root = null;
 			else if (isLeftChild)
-				parentNode.leftchild = null;
+				parentNode.leftChild = null;
 			else
-				parentNode.rightchild = null;
+				parentNode.rightChild = null;
 		}
 
 		// Case 2-1 : if node has one child that is on the left
-		else if (nodeToDelete.rightchild == null) {
+		else if (nodeToDelete.rightChild == null) {
 			if (nodeToDelete == root)
-				root = nodeToDelete.leftchild;
+				root = nodeToDelete.leftChild;
 			else if (isLeftChild)
-				parentNode.leftchild = nodeToDelete.leftchild;
+				parentNode.leftChild = nodeToDelete.leftChild;
 			else
-				parentNode.rightchild = nodeToDelete.leftchild;
+				parentNode.rightChild = nodeToDelete.leftChild;
 		}
 		// Case 2-2 :if node has one child that is on the right
-		else if (nodeToDelete.leftchild == null) {
+		else if (nodeToDelete.leftChild == null) {
 			if (nodeToDelete == root)
-				root = nodeToDelete.rightchild;
+				root = nodeToDelete.rightChild;
 			else if (isLeftChild)
-				parentNode.leftchild = nodeToDelete.rightchild;
+				parentNode.leftChild = nodeToDelete.rightChild;
 			else
-				parentNode.rightchild = nodeToDelete.rightchild;
+				parentNode.rightChild = nodeToDelete.rightChild;
 		}
 
 		// Case 3 :if node has 2 children (tricky)
@@ -119,11 +119,11 @@ public class BST {
 			if (nodeToDelete == root)
 				root = successor;
 			else if (isLeftChild)
-				parentNode.leftchild = successor;
+				parentNode.leftChild = successor;
 			else
-				parentNode.rightchild = successor;
+				parentNode.rightChild = successor;
 
-			successor.leftchild = nodeToDelete.leftchild;
+			successor.leftChild = nodeToDelete.leftChild;
 		}
 		return true;
 	}
@@ -132,18 +132,88 @@ public class BST {
 		Node successorParent = nodeToDelete;
 		Node successor = nodeToDelete;
 
-		Node current = nodeToDelete.rightchild; // Go to the right child
+		Node current = nodeToDelete.rightChild; // Go to the right child
 
 		while (current != null) { // start going left down the tree until node has no left child
 			successorParent = successor;
 			successor = current;
-			current = current.leftchild;
+			current = current.leftChild;
 		}
 		// successor not a right child
-		if (successor != nodeToDelete.rightchild) {
-			successorParent.leftchild = successor.rightchild;
-			successor.rightchild = nodeToDelete.rightchild;
+		if (successor != nodeToDelete.rightChild) {
+			successorParent.leftChild = successor.rightChild;
+			successor.rightChild = nodeToDelete.rightChild;
 		}
 		return successor;
+	}
+
+//	public void displayTree_myAnswer() {
+//		Node current = findRoot();
+//
+//		System.out.print(current.key + " ");
+//
+//		while (current != null) {
+//			// For printing right child
+//			if (current.leftchild != null)
+//				System.out.print(current.leftchild.key + " ");
+//			else
+//				System.out.println("--" + " ");
+//
+//			// For printing left child
+//			if (current.rightchild != null)
+//				System.out.print(current.rightchild.key + " ");
+//			else
+//				System.out.println("--" + " ");
+//
+//			current = current.leftchild;
+//			current = current.rightchild;
+//		}
+//	}
+//	
+//	public Node findRoot() {
+//		return root;
+//	}
+
+	public void displayTree() {
+		Stack globalStack = new Stack();
+		globalStack.push(root); // put root Node to global stack
+		int nBlanks = 24;
+		boolean isRowEmpty = false;
+		System.out.println("......................................................");
+
+		while (isRowEmpty == false) {
+			Stack localStack = new Stack();
+			isRowEmpty = true;
+			for (int j = 0; j < nBlanks; j++) {
+				System.out.print(" ");
+			}
+
+			while (globalStack.isEmpty() == false) {
+				Node temp = (Node) globalStack.pop(); // pop root Node to global stack
+				if (temp != null) {
+					System.out.print(temp.key);
+					localStack.push(temp.leftChild);
+					localStack.push(temp.rightChild);
+					if (temp.leftChild != null || temp.rightChild != null) {
+						isRowEmpty = false;
+					}
+				} else {
+					System.out.print("--");
+					localStack.push(null);
+					localStack.push(null);
+				}
+
+				for (int j = 0; j < nBlanks * 2 - 2; j++) {
+					System.out.print(" ");
+				}
+			}
+
+			System.out.println();
+			nBlanks = nBlanks / 2;
+
+			while (localStack.isEmpty() == false)
+				globalStack.push(localStack.pop());
+		}
+		System.out.println("......................................................");
 	}
 }
