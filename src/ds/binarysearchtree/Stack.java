@@ -6,12 +6,12 @@
 package ds.binarysearchtree;
 
 public class Stack {
-	private int maxSize = 100;
+	private int maxSize = 20;
 	private Node[] stackArray;
 	private int top;
 
 	public Stack() {
-		this.stackArray = new Node[100];
+		this.stackArray = new Node[maxSize];
 		this.top = -1;
 	}
 
