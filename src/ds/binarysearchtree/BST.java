@@ -3,7 +3,7 @@
  * May 25, 2019
  * Udemy - Practical Data Structures & Algorithms in Java + HW Course
  */
-package binarysearchtree;
+package ds.binarysearchtree;
 
 public class BST {
 	private Node root;
@@ -148,30 +148,26 @@ public class BST {
 	}
 
 //	public void displayTree_myAnswer() {
-//		Node current = findRoot();
+//		Node current = root;
 //
 //		System.out.print(current.key + " ");
 //
 //		while (current != null) {
 //			// For printing right child
-//			if (current.leftchild != null)
-//				System.out.print(current.leftchild.key + " ");
+//			if (current.leftChild != null)
+//				System.out.print(current.leftChild.key + " ");
 //			else
 //				System.out.println("--" + " ");
 //
 //			// For printing left child
-//			if (current.rightchild != null)
-//				System.out.print(current.rightchild.key + " ");
+//			if (current.rightChild != null)
+//				System.out.print(current.rightChild.key + " ");
 //			else
 //				System.out.println("--" + " ");
 //
-//			current = current.leftchild;
-//			current = current.rightchild;
+//			current = current.leftChild;
+//			current = current.rightChild;
 //		}
-//	}
-//	
-//	public Node findRoot() {
-//		return root;
 //	}
 
 	public void displayTree() {

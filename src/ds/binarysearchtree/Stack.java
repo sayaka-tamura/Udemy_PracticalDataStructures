@@ -3,7 +3,7 @@
  * May 15, 2019
  * Udemy - Practical Data Structures & Algorithms in Java + HW Course
  */
-package binarysearchtree;
+package ds.binarysearchtree;
 
 public class Stack {
 	private int maxSize = 100;

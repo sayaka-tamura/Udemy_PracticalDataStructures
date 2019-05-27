@@ -3,7 +3,7 @@
  * May 25, 2019
  * Udemy - Practical Data Structures & Algorithms in Java + HW Course
  */
-package binarysearchtree;
+package ds.binarysearchtree;
 
 public class Node {
 	int key;
